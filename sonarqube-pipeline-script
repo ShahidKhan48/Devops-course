@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     environment {
-        // Define SonarScanner and DockerHub credentials environment variables
+        // Define SonarScanner and GitHub credentials environment variables
         scannerHome = tool 'SonarScanner'   // SonarScanner tool configured in Jenkins
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')  // Make sure the credentials ID matches
         GITHUB_CREDENTIALS = credentials('github-credentials-id')  // Make sure the GitHub credentials are correct
     }
 
     stages {
-        stage('Clone repository') {
+        stage('Clone Repository') {
             steps {
                 git credentialsId: 'github-credentials-id',
                     url: 'https://github.com/ShahidKhan48/jenkins-sonar.git',
@@ -27,37 +26,6 @@ pipeline {
                     -Dsonar.host.url=http://172.19.0.3:9000 \
                     -Dsonar.login=admin \
                     -Dsonar.password=Admin@123456
-                    """
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh """
-                    docker build -t md7481920/react-app:latest .
-                    """
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    sh """
-                    docker login -u ${DOCKER_HUB_CREDENTIALS_USR} -p ${DOCKER_HUB_CREDENTIALS_PSW}
-                    docker push md7481920/react-app:latest
-                    """
-                }
-            }
-        }
-
-        stage('Deploy to Docker') {
-            steps {
-                script {
-                    sh """
-                    docker run -d -p 8080:8080 md7481920/react-app:latest
                     """
                 }
             }
