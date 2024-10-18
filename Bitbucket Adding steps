@@ -1,0 +1,23 @@
+1. Step 1: Install Git in VS Code/intellijeidea
+2.Step 2: Create a Repository on Bitbucket
+Login to Bitbucket and create a new repository.
+
+Click on Create repository.
+Set your repository name (e.g., my-vscode-project).
+Choose repository visibility (private or public).
+Choose Git as the repository type.
+Click on Create repository.
+Once the repository is created, you will be provided with the repository URL. Copy that, as you’ll need it later.
+-----------------------------
+
+Step 3: Configure SSH for Bitbucket (Optional but Recommended)
+To connect VS Code and Bitbucket securely, it's best to use SSH.
+
+Generate SSH Key: Open a terminal (or Git Bash) and generate an SSH key:-
+  ssh-keygen -t rsa -b 4096 -C "md7481920@gmail.com"
+
+
+
+-----------------------------------
+
+
